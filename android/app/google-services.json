@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "155121309760",
+    "project_id": "arkeonil",
+    "storage_bucket": "arkeonil.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155121309760:android:5bc4072415e922e15f67a5",
+        "android_client_info": {
+          "package_name": "com.example.arkeonil"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA75PAsU9dpilMp0Lt8rp7i_VG7qmR1IeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
