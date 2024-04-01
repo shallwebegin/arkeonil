@@ -1,5 +1,6 @@
 import 'package:arkeonil/bookmark/view/bookmark_view.dart';
 import 'package:arkeonil/browse/view/browse_view.dart';
+import 'package:arkeonil/categories/view/category_view.dart';
 import 'package:arkeonil/common/colors.dart';
 import 'package:arkeonil/common/paths.dart';
 import 'package:arkeonil/discover/view/discover_view.dart';
@@ -20,7 +21,7 @@ class _HomeState extends State<Home> {
     DiscoverView(),
     BrowseView(),
     BookmarkView(),
-    MoreView()
+    MoreView(),
   ];
 
   void onTap(int index) {

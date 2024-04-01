@@ -17,6 +17,8 @@ const all5 = EdgeInsets.all(5);
 
 //Horizontal
 
+const horizontal25 = EdgeInsets.symmetric(horizontal: 25);
+const horizontal20 = EdgeInsets.symmetric(horizontal: 20);
 const horizontal10 = EdgeInsets.symmetric(horizontal: 10);
 const horizontal5 = EdgeInsets.symmetric(horizontal: 5);
 

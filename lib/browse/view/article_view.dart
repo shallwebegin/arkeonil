@@ -1,8 +1,9 @@
-import 'package:arkeonil/browse/controller/browse_controller.dart';
+import 'package:arkeonil/bookmark/controller/bookmark_controller.dart';
 import 'package:arkeonil/common/colors.dart';
 import 'package:arkeonil/common/paths.dart';
 import 'package:arkeonil/common/sizes.dart';
 import 'package:arkeonil/models/article_model.dart';
+import 'package:arkeonil/models/favorite_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,14 +17,22 @@ class ArticleView extends ConsumerStatefulWidget {
 }
 
 class _ArticleViewState extends ConsumerState<ArticleView> {
+  void isFavorite() {
+    FavoriteModel model = FavoriteModel(
+        createdAt: widget.article.createdAt,
+        author: widget.article.author,
+        content: widget.article.content,
+        title: widget.article.title,
+        authorImg: widget.article.authorImg,
+        coverImg: widget.article.coverImg,
+        uid: widget.article.uid,
+        authorUid: widget.article.authorUid,
+        isFavorite: true);
+    ref.read(bookMarkControllerProvider).setArticleFavorite(model);
+  }
+
   @override
   Widget build(BuildContext context) {
-    void isFavorite() {
-      setState(() {
-        widget.article.isFavorite = !widget.article.isFavorite;
-      });
-    }
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -42,23 +51,17 @@ class _ArticleViewState extends ConsumerState<ArticleView> {
               ?.copyWith(color: whiteColor),
         ),
         actions: [
-          FutureBuilder<Stream<List<ArticleModel>>>(
-              future: ref
-                  .read(browseControllerProvider)
-                  .setArticlesFavorites(widget.article.uid, true),
-              builder: (context, snapshot) {
-                return IconButton(
-                  onPressed: isFavorite,
-                  icon: CircleAvatar(
-                    backgroundColor: buttonColor,
-                    child: SvgPicture.asset(
-                      bookmarkSvg,
-                      colorFilter:
-                          const ColorFilter.mode(whiteColor, BlendMode.srcIn),
-                    ),
-                  ),
-                );
-              }),
+          IconButton(
+            onPressed: isFavorite,
+            icon: CircleAvatar(
+              backgroundColor: buttonColor,
+              child: SvgPicture.asset(
+                bookmarkSvg,
+                colorFilter:
+                    const ColorFilter.mode(whiteColor, BlendMode.srcIn),
+              ),
+            ),
+          ),
         ],
       ),
       body: Padding(

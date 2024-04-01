@@ -24,6 +24,7 @@ class MoreRepository {
         .collection('users')
         .doc(auth.currentUser!.uid)
         .get();
+
     return UserModel.fromMap(user.data()!);
   }
 

@@ -16,9 +16,4 @@ class BrowseController {
   Stream<List<ArticleModel>> getArticles() {
     return browseRepository.getArticles();
   }
-
-  Future<Stream<List<ArticleModel>>> setArticlesFavorites(
-      String articleId, bool isFavorite) async {
-    return await browseRepository.setArticlesFavorites(articleId, isFavorite);
-  }
 }

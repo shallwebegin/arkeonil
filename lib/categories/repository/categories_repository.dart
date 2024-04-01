@@ -1,29 +1,27 @@
-import 'package:arkeonil/models/article_model.dart';
+import 'package:arkeonil/models/archae_category_models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final browseRepositoryProvider = Provider((ref) => BrowseRepository(
+final categoryRepositoryProvider = Provider((ref) => CategoryRepository(
     firebaseFirestore: FirebaseFirestore.instance,
     auth: FirebaseAuth.instance));
 
-class BrowseRepository {
+class CategoryRepository {
   final FirebaseFirestore firebaseFirestore;
   final FirebaseAuth auth;
 
-  BrowseRepository({required this.firebaseFirestore, required this.auth});
+  CategoryRepository({required this.firebaseFirestore, required this.auth});
 
-  Stream<List<ArticleModel>> getArticles() {
+  Stream<List<ArchaeCategory>> getProfilePhotosArch() {
     return firebaseFirestore
-        .collection('articles')
-        .orderBy('createdAt', descending: true)
+        .collection('archaecategory')
+        .orderBy('image', descending: true)
         .snapshots()
         .map((snapshot) {
-      List<ArticleModel> list = [];
+      List<ArchaeCategory> list = [];
       for (var model in snapshot.docs) {
-        list.add(
-          ArticleModel.fromMap(model.data()),
-        );
+        list.add(ArchaeCategory.fromMap(model.data()));
       }
       return list;
     });

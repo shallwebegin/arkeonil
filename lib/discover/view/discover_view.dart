@@ -1,10 +1,10 @@
+import 'package:arkeonil/categories/controller/categories_controller.dart';
 import 'package:arkeonil/common/colors.dart';
 import 'package:arkeonil/common/sizes.dart';
-import 'package:arkeonil/discover/controller/discover_controller.dart';
 import 'package:arkeonil/features/widgets/appbar_with_title.dart';
 import 'package:arkeonil/features/widgets/content_list_view.dart';
 import 'package:arkeonil/features/widgets/subtitle_widget.dart';
-import 'package:arkeonil/models/user_model.dart';
+import 'package:arkeonil/models/archae_category_models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,12 +23,13 @@ class DiscoverView extends ConsumerWidget {
               const AppbarWithTitle(title: 'Discover'),
               Expanded(
                 flex: 1,
-                child: StreamBuilder<List<UserModel>>(
-                  stream:
-                      ref.watch(discoverControllerProvider).getProfilePhotos(),
+                child: StreamBuilder<List<ArchaeCategory>>(
+                  stream: ref
+                      .watch(categoryControllerProvider)
+                      .getProfilePhotosArch(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      List<UserModel> user = snapshot.data!;
+                      List<ArchaeCategory> user = snapshot.data!;
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: user.length,
@@ -41,13 +42,12 @@ class DiscoverView extends ConsumerWidget {
                               children: [
                                 CircleAvatar(
                                   radius: 30,
-                                  backgroundImage:
-                                      NetworkImage(users.profilePhoto!),
+                                  backgroundImage: NetworkImage(users.image),
                                 ),
                                 Padding(
                                   padding: top10,
                                   child: Text(
-                                    users.name,
+                                    users.title,
                                     style: Theme.of(context)
                                         .textTheme
                                         .bodyMedium

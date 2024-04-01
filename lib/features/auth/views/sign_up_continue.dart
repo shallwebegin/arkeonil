@@ -105,7 +105,6 @@ class _SignUpContinueState extends State<SignUpContinue> {
                             }
                             return null;
                           },
-                          obscureText: true,
                           decoration: InputDecoration(
                               contentPadding: vertical10,
                               border: OutlineInputBorder(
@@ -128,7 +127,6 @@ class _SignUpContinueState extends State<SignUpContinue> {
                             }
                             return null;
                           },
-                          obscureText: true,
                           decoration: InputDecoration(
                               contentPadding: vertical10,
                               border: OutlineInputBorder(
