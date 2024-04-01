@@ -8,6 +8,7 @@ class FavoriteModel {
   final DateTime createdAt;
   final String authorUid;
   bool isFavorite;
+  final String category;
   FavoriteModel({
     required this.uid,
     required this.title,
@@ -18,6 +19,7 @@ class FavoriteModel {
     required this.createdAt,
     required this.authorUid,
     required this.isFavorite,
+    required this.category,
   });
 
   FavoriteModel copyWith({
@@ -30,6 +32,7 @@ class FavoriteModel {
     DateTime? createdAt,
     String? authorUid,
     bool? isFavorite,
+    String? category,
   }) {
     return FavoriteModel(
       uid: uid ?? this.uid,
@@ -41,6 +44,7 @@ class FavoriteModel {
       createdAt: createdAt ?? this.createdAt,
       authorUid: authorUid ?? this.authorUid,
       isFavorite: isFavorite ?? this.isFavorite,
+      category: category ?? this.category,
     );
   }
 
@@ -55,6 +59,7 @@ class FavoriteModel {
       'createdAt': createdAt.millisecondsSinceEpoch,
       'authorUid': authorUid,
       'isFavorite': isFavorite,
+      'category': category,
     };
   }
 
@@ -69,12 +74,13 @@ class FavoriteModel {
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
       authorUid: map['authorUid'] as String,
       isFavorite: map['isFavorite'] as bool,
+      category: map['category'] as String,
     );
   }
 
   @override
   String toString() {
-    return 'FavoriteModel(uid: $uid, title: $title, coverImg: $coverImg, content: $content, author: $author, authorImg: $authorImg, createdAt: $createdAt, authorUid: $authorUid, isFavorite: $isFavorite)';
+    return 'FavoriteModel(uid: $uid, title: $title, coverImg: $coverImg, content: $content, author: $author, authorImg: $authorImg, createdAt: $createdAt, authorUid: $authorUid, isFavorite: $isFavorite, category: $category)';
   }
 
   @override
@@ -89,7 +95,8 @@ class FavoriteModel {
         other.authorImg == authorImg &&
         other.createdAt == createdAt &&
         other.authorUid == authorUid &&
-        other.isFavorite == isFavorite;
+        other.isFavorite == isFavorite &&
+        other.category == category;
   }
 
   @override
@@ -102,6 +109,7 @@ class FavoriteModel {
         authorImg.hashCode ^
         createdAt.hashCode ^
         authorUid.hashCode ^
-        isFavorite.hashCode;
+        isFavorite.hashCode ^
+        category.hashCode;
   }
 }

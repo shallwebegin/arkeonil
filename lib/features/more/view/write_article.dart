@@ -14,6 +14,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
+enum CategoryLabel {
+  smile('Smile'),
+  cloud('Cloud'),
+  brush('Brush'),
+  heart('Heart');
+
+  const CategoryLabel(
+    this.label,
+  );
+  final String label;
+}
+
 class WriteArticle extends ConsumerStatefulWidget {
   const WriteArticle({super.key, required this.currentUser});
   final UserModel currentUser;
@@ -24,15 +36,18 @@ class WriteArticle extends ConsumerStatefulWidget {
 
 class _WriteArticleState extends ConsumerState<WriteArticle> {
   XFile? image;
+  CategoryLabel? selectedCategory;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
+  final TextEditingController _categoryController = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
     _titleController.dispose();
     _contentController.dispose();
+    _categoryController.dispose();
   }
 
   void pickImage() async {
@@ -85,7 +100,10 @@ class _WriteArticleState extends ConsumerState<WriteArticle> {
                         createdAt: DateTime.now(),
                         coverImg: value,
                         authorUid: user.uid!,
-                        isFavorite: false);
+                        isFavorite: false,
+                        category: _categoryController.text,
+                        categoryTitle: _categoryController.text,
+                        image: value);
                     ref
                         .read(moreControllerProvider)
                         .writeArticles(articleModel)
@@ -181,6 +199,29 @@ class _WriteArticleState extends ConsumerState<WriteArticle> {
                     ),
                   ),
                 ),
+                DropdownMenu<CategoryLabel>(
+                  initialSelection: CategoryLabel.brush,
+                  controller: _categoryController,
+                  requestFocusOnTap: true,
+                  dropdownMenuEntries: CategoryLabel.values
+                      .map<DropdownMenuEntry<CategoryLabel>>(
+                          (CategoryLabel category) {
+                    return DropdownMenuEntry<CategoryLabel>(
+                      value: category,
+                      label: category.label,
+                      enabled: category.label != 'Heart',
+                      style: MenuItemButton.styleFrom(
+                        foregroundColor: buttonColor,
+                      ),
+                    );
+                  }).toList(),
+                  label: const Text('Category'),
+                  onSelected: (CategoryLabel? category) {
+                    setState(() {
+                      selectedCategory = category;
+                    });
+                  },
+                )
               ],
             ),
           ),

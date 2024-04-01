@@ -1,4 +1,5 @@
 import 'package:arkeonil/categories/controller/categories_controller.dart';
+import 'package:arkeonil/categories/view/category_view.dart';
 import 'package:arkeonil/common/colors.dart';
 import 'package:arkeonil/common/sizes.dart';
 import 'package:arkeonil/features/widgets/appbar_with_title.dart';
@@ -36,25 +37,34 @@ class DiscoverView extends ConsumerWidget {
                         itemBuilder: (context, index) {
                           final users = user[index];
 
-                          return Padding(
-                            padding: all15,
-                            child: Column(
-                              children: [
-                                CircleAvatar(
-                                  radius: 30,
-                                  backgroundImage: NetworkImage(users.image),
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => CategoryView(),
                                 ),
-                                Padding(
-                                  padding: top10,
-                                  child: Text(
-                                    users.title,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium
-                                        ?.copyWith(color: whiteColor),
+                              );
+                            },
+                            child: Padding(
+                              padding: all15,
+                              child: Column(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 30,
+                                    backgroundImage: NetworkImage(users.image),
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding: top10,
+                                    child: Text(
+                                      users.title,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(color: whiteColor),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           );
                         },

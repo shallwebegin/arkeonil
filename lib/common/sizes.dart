@@ -22,6 +22,12 @@ const horizontal20 = EdgeInsets.symmetric(horizontal: 20);
 const horizontal10 = EdgeInsets.symmetric(horizontal: 10);
 const horizontal5 = EdgeInsets.symmetric(horizontal: 5);
 
+//left
+const left5 = EdgeInsets.only(left: 5);
+const left10 = EdgeInsets.only(left: 10);
+const left15 = EdgeInsets.only(left: 15);
+const left20 = EdgeInsets.only(left: 20);
+
 //Right
 const right10 = EdgeInsets.only(right: 10);
 const right5 = EdgeInsets.only(right: 5);

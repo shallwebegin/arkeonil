@@ -1,5 +1,6 @@
 import 'package:arkeonil/categories/repository/categories_repository.dart';
 import 'package:arkeonil/models/archae_category_models.dart';
+import 'package:arkeonil/models/article_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final categoryControllerProvider = Provider((ref) {
@@ -14,5 +15,9 @@ class CategoryController {
 
   Stream<List<ArchaeCategory>> getProfilePhotosArch() {
     return categoryRepository.getProfilePhotosArch();
+  }
+
+  Stream<List<ArticleModel>> getArticles(String category) {
+    return categoryRepository.getArticles(category);
   }
 }
