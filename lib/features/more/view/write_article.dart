@@ -15,10 +15,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 enum CategoryLabel {
-  smile('Smile'),
-  cloud('Cloud'),
-  brush('Brush'),
-  heart('Heart');
+  smile('Egypt'),
+  cloud('Greek'),
+  brush('Earth'),
+  heart('Turkey');
 
   const CategoryLabel(
     this.label,
@@ -92,18 +92,17 @@ class _WriteArticleState extends ConsumerState<WriteArticle> {
                       .then((value) {
                     String uid = const Uuid().v4();
                     ArticleModel articleModel = ArticleModel(
-                        uid: uid,
-                        title: _titleController.text,
-                        content: _contentController.text,
-                        author: "${user.name} ${user.surname}",
-                        authorImg: user.profilePhoto!,
-                        createdAt: DateTime.now(),
-                        coverImg: value,
-                        authorUid: user.uid!,
-                        isFavorite: false,
-                        category: _categoryController.text,
-                        categoryTitle: _categoryController.text,
-                        image: value);
+                      uid: uid,
+                      title: _titleController.text,
+                      content: _contentController.text,
+                      author: "${user.name} ${user.surname}",
+                      authorImg: user.profilePhoto!,
+                      createdAt: DateTime.now(),
+                      coverImg: value,
+                      authorUid: user.uid!,
+                      isFavorite: false,
+                      category: _categoryController.text,
+                    );
                     ref
                         .read(moreControllerProvider)
                         .writeArticles(articleModel)

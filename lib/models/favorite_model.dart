@@ -9,6 +9,7 @@ class FavoriteModel {
   final String authorUid;
   bool isFavorite;
   final String category;
+
   FavoriteModel({
     required this.uid,
     required this.title,

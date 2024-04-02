@@ -1,52 +1,54 @@
 class ArchaeCategory {
+  final String category;
+  final String categoryId;
   final String image;
-  final String title;
-  final String uid;
   ArchaeCategory({
+    required this.category,
+    required this.categoryId,
     required this.image,
-    required this.title,
-    required this.uid,
   });
 
   ArchaeCategory copyWith({
+    String? category,
+    String? categoryId,
     String? image,
-    String? title,
-    String? uid,
   }) {
     return ArchaeCategory(
+      category: category ?? this.category,
+      categoryId: categoryId ?? this.categoryId,
       image: image ?? this.image,
-      title: title ?? this.title,
-      uid: uid ?? this.uid,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'category': category,
+      'categoryId': categoryId,
       'image': image,
-      'title': title,
-      'uid': uid,
     };
   }
 
   factory ArchaeCategory.fromMap(Map<String, dynamic> map) {
     return ArchaeCategory(
+      category: map['category'] as String,
+      categoryId: map['categoryId'] as String,
       image: map['image'] as String,
-      title: map['title'] as String,
-      uid: map['uid'] as String,
     );
   }
 
   @override
   String toString() =>
-      'ArchaeCategory(image: $image, title: $title, uid: $uid)';
+      'ArchaeCategory(category: $category, categoryId: $categoryId, image: $image)';
 
   @override
   bool operator ==(covariant ArchaeCategory other) {
     if (identical(this, other)) return true;
 
-    return other.image == image && other.title == title && other.uid == uid;
+    return other.category == category &&
+        other.categoryId == categoryId &&
+        other.image == image;
   }
 
   @override
-  int get hashCode => image.hashCode ^ title.hashCode ^ uid.hashCode;
+  int get hashCode => category.hashCode ^ categoryId.hashCode ^ image.hashCode;
 }

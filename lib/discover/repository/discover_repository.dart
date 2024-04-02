@@ -1,4 +1,4 @@
-import 'package:arkeonil/models/user_model.dart';
+import 'package:arkeonil/models/archae_category_models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,15 +13,15 @@ class DiscoverRepository {
 
   DiscoverRepository({required this.firebaseFirestore, required this.auth});
 
-  Stream<List<UserModel>> getProfilePhotos() {
+  Stream<List<ArchaeCategory>> getProfilePhotos() {
     return firebaseFirestore
-        .collection('users')
-        .orderBy('profilePhoto', descending: true)
+        .collection('archaecategory')
+        .orderBy('image', descending: true)
         .snapshots()
         .map((snapshot) {
-      List<UserModel> list = [];
+      List<ArchaeCategory> list = [];
       for (var model in snapshot.docs) {
-        list.add(UserModel.fromMap(model.data()));
+        list.add(ArchaeCategory.fromMap(model.data()));
       }
       return list;
     });

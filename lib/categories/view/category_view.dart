@@ -2,6 +2,7 @@ import 'package:arkeonil/categories/controller/categories_controller.dart';
 import 'package:arkeonil/common/colors.dart';
 import 'package:arkeonil/common/sizes.dart';
 import 'package:arkeonil/features/widgets/appbar_with_title.dart';
+import 'package:arkeonil/models/archae_category_models.dart';
 import 'package:arkeonil/models/article_model.dart';
 import 'package:arkeonil/router/router_names.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -10,7 +11,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 class CategoryView extends ConsumerWidget {
-  const CategoryView({super.key});
+  const CategoryView({
+    required this.model,
+    super.key,
+  });
+  final ArchaeCategory model;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,7 +24,7 @@ class CategoryView extends ConsumerWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const AppbarWithTitle(title: 'Egypt'),
+              AppbarWithTitle(title: model.category),
               Padding(
                 padding: scaffoldPadding,
                 child: SizedBox(
@@ -28,7 +33,7 @@ class CategoryView extends ConsumerWidget {
                   child: StreamBuilder<List<ArticleModel>>(
                     stream: ref
                         .watch(categoryControllerProvider)
-                        .getArticles('Smile'),
+                        .getArticles(model.category),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(

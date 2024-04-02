@@ -8,9 +8,6 @@ class ArticleModel {
   final DateTime createdAt;
   final String authorUid;
   bool isFavorite;
-  String? image;
-  String? categoryTitle;
-
   final String category;
 
   ArticleModel({
@@ -23,8 +20,6 @@ class ArticleModel {
     required this.createdAt,
     required this.authorUid,
     required this.isFavorite,
-    this.image,
-    this.categoryTitle,
     required this.category,
   });
 
@@ -38,8 +33,6 @@ class ArticleModel {
     DateTime? createdAt,
     String? authorUid,
     bool? isFavorite,
-    String? image,
-    String? categoryTitle,
     String? category,
   }) {
     return ArticleModel(
@@ -52,8 +45,6 @@ class ArticleModel {
       createdAt: createdAt ?? this.createdAt,
       authorUid: authorUid ?? this.authorUid,
       isFavorite: isFavorite ?? this.isFavorite,
-      image: image ?? this.image,
-      categoryTitle: categoryTitle ?? this.categoryTitle,
       category: category ?? this.category,
     );
   }
@@ -69,8 +60,6 @@ class ArticleModel {
       'createdAt': createdAt.millisecondsSinceEpoch,
       'authorUid': authorUid,
       'isFavorite': isFavorite,
-      'image': image,
-      'categoryTitle': categoryTitle,
       'category': category,
     };
   }
@@ -86,16 +75,13 @@ class ArticleModel {
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
       authorUid: map['authorUid'] as String,
       isFavorite: map['isFavorite'] as bool,
-      image: map['image'] != null ? map['image'] as String : null,
-      categoryTitle:
-          map['categoryTitle'] != null ? map['categoryTitle'] as String : null,
       category: map['category'] as String,
     );
   }
 
   @override
   String toString() {
-    return 'ArticleModel(uid: $uid, title: $title, coverImg: $coverImg, content: $content, author: $author, authorImg: $authorImg, createdAt: $createdAt, authorUid: $authorUid, isFavorite: $isFavorite, image: $image, categoryTitle: $categoryTitle, category: $category)';
+    return 'ArticleModel(uid: $uid, title: $title, coverImg: $coverImg, content: $content, author: $author, authorImg: $authorImg, createdAt: $createdAt, authorUid: $authorUid, isFavorite: $isFavorite, category: $category)';
   }
 
   @override
@@ -111,8 +97,6 @@ class ArticleModel {
         other.createdAt == createdAt &&
         other.authorUid == authorUid &&
         other.isFavorite == isFavorite &&
-        other.image == image &&
-        other.categoryTitle == categoryTitle &&
         other.category == category;
   }
 
@@ -127,8 +111,6 @@ class ArticleModel {
         createdAt.hashCode ^
         authorUid.hashCode ^
         isFavorite.hashCode ^
-        image.hashCode ^
-        categoryTitle.hashCode ^
         category.hashCode;
   }
 }

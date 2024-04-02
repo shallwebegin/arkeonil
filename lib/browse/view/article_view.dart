@@ -19,16 +19,17 @@ class ArticleView extends ConsumerStatefulWidget {
 class _ArticleViewState extends ConsumerState<ArticleView> {
   void isFavorite() {
     FavoriteModel model = FavoriteModel(
-        createdAt: widget.article.createdAt,
-        author: widget.article.author,
-        content: widget.article.content,
-        title: widget.article.title,
-        authorImg: widget.article.authorImg,
-        coverImg: widget.article.coverImg,
-        uid: widget.article.uid,
-        authorUid: widget.article.authorUid,
-        isFavorite: true,
-        category: widget.article.category);
+      createdAt: widget.article.createdAt,
+      author: widget.article.author,
+      content: widget.article.content,
+      title: widget.article.title,
+      authorImg: widget.article.authorImg,
+      coverImg: widget.article.coverImg,
+      uid: widget.article.uid,
+      authorUid: widget.article.authorUid,
+      isFavorite: true,
+      category: widget.article.category,
+    );
     ref.read(bookMarkControllerProvider).setArticleFavorite(model);
   }
 

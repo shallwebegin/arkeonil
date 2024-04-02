@@ -1,7 +1,7 @@
-import 'package:arkeonil/categories/controller/categories_controller.dart';
 import 'package:arkeonil/categories/view/category_view.dart';
 import 'package:arkeonil/common/colors.dart';
 import 'package:arkeonil/common/sizes.dart';
+import 'package:arkeonil/discover/controller/discover_controller.dart';
 import 'package:arkeonil/features/widgets/appbar_with_title.dart';
 import 'package:arkeonil/features/widgets/content_list_view.dart';
 import 'package:arkeonil/features/widgets/subtitle_widget.dart';
@@ -9,11 +9,18 @@ import 'package:arkeonil/models/archae_category_models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DiscoverView extends ConsumerWidget {
-  const DiscoverView({super.key});
+class DiscoverView extends ConsumerStatefulWidget {
+  const DiscoverView({
+    super.key,
+  });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DiscoverView> createState() => _DiscoverViewState();
+}
+
+class _DiscoverViewState extends ConsumerState<DiscoverView> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -25,38 +32,39 @@ class DiscoverView extends ConsumerWidget {
               Expanded(
                 flex: 1,
                 child: StreamBuilder<List<ArchaeCategory>>(
-                  stream: ref
-                      .watch(categoryControllerProvider)
-                      .getProfilePhotosArch(),
+                  stream:
+                      ref.watch(discoverControllerProvider).getProfilePhotos(),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      List<ArchaeCategory> user = snapshot.data!;
+                      List<ArchaeCategory> article = snapshot.data!;
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: user.length,
+                        itemCount: article.length,
                         itemBuilder: (context, index) {
-                          final users = user[index];
+                          final articles = article[index];
 
                           return GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => CategoryView(),
+                                  builder: (context) =>
+                                      CategoryView(model: articles),
                                 ),
                               );
                             },
                             child: Padding(
-                              padding: all15,
+                              padding: all16,
                               child: Column(
                                 children: [
                                   CircleAvatar(
                                     radius: 30,
-                                    backgroundImage: NetworkImage(users.image),
+                                    backgroundImage:
+                                        NetworkImage(articles.image),
                                   ),
                                   Padding(
                                     padding: top10,
                                     child: Text(
-                                      users.title,
+                                      articles.category,
                                       style: Theme.of(context)
                                           .textTheme
                                           .bodyMedium

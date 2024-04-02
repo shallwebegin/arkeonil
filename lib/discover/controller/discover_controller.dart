@@ -1,5 +1,5 @@
 import 'package:arkeonil/discover/repository/discover_repository.dart';
-import 'package:arkeonil/models/user_model.dart';
+import 'package:arkeonil/models/archae_category_models.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final discoverControllerProvider = Provider((ref) {
@@ -12,7 +12,7 @@ class DiscoverController {
 
   DiscoverController({required this.discoverRepository});
 
-  Stream<List<UserModel>> getProfilePhotos() {
+  Stream<List<ArchaeCategory>> getProfilePhotos() {
     return discoverRepository.getProfilePhotos();
   }
 }
