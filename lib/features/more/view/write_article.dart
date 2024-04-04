@@ -6,6 +6,7 @@ import 'package:arkeonil/common/repository/common_firebase_repository.dart';
 import 'package:arkeonil/common/sizes.dart';
 import 'package:arkeonil/common/utils.dart';
 import 'package:arkeonil/features/more/controller/more_controller.dart';
+import 'package:arkeonil/models/article_cities_model.dart';
 import 'package:arkeonil/models/article_model.dart';
 import 'package:arkeonil/models/user_model.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +16,26 @@ import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
 enum CategoryLabel {
-  smile('Egypt'),
-  cloud('Greek'),
-  brush('Earth'),
-  heart('Turkey');
+  egypt('Egypt'),
+  greek('Greek'),
+  earth('Earth'),
+  turkey('Turkey');
 
   const CategoryLabel(
+    this.label,
+  );
+  final String label;
+}
+
+enum CityLabel {
+  egypt('Kahire'),
+  egypt2('Sakkara'),
+
+  greek('Athens'),
+  turkey('Kesan'),
+  greek2('Xanthi');
+
+  const CityLabel(
     this.label,
   );
   final String label;
@@ -37,10 +52,12 @@ class WriteArticle extends ConsumerStatefulWidget {
 class _WriteArticleState extends ConsumerState<WriteArticle> {
   XFile? image;
   CategoryLabel? selectedCategory;
+  CityLabel? selectedCity;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
   final TextEditingController _categoryController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
 
   @override
   void dispose() {
@@ -48,6 +65,7 @@ class _WriteArticleState extends ConsumerState<WriteArticle> {
     _titleController.dispose();
     _contentController.dispose();
     _categoryController.dispose();
+    _cityController.dispose();
   }
 
   void pickImage() async {
@@ -102,7 +120,9 @@ class _WriteArticleState extends ConsumerState<WriteArticle> {
                       authorUid: user.uid!,
                       isFavorite: false,
                       category: _categoryController.text,
+                      cityName: _cityController.text.split(','),
                     );
+
                     ref
                         .read(moreControllerProvider)
                         .writeArticles(articleModel)
@@ -198,28 +218,72 @@ class _WriteArticleState extends ConsumerState<WriteArticle> {
                     ),
                   ),
                 ),
-                DropdownMenu<CategoryLabel>(
-                  initialSelection: CategoryLabel.brush,
-                  controller: _categoryController,
-                  requestFocusOnTap: true,
-                  dropdownMenuEntries: CategoryLabel.values
-                      .map<DropdownMenuEntry<CategoryLabel>>(
-                          (CategoryLabel category) {
-                    return DropdownMenuEntry<CategoryLabel>(
-                      value: category,
-                      label: category.label,
-                      enabled: category.label != 'Heart',
-                      style: MenuItemButton.styleFrom(
-                        foregroundColor: buttonColor,
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    children: [
+                      DropdownMenu<CategoryLabel>(
+                        initialSelection: CategoryLabel.egypt,
+                        controller: _categoryController,
+                        requestFocusOnTap: true,
+                        dropdownMenuEntries: CategoryLabel.values
+                            .map<DropdownMenuEntry<CategoryLabel>>(
+                                (CategoryLabel category) {
+                          return DropdownMenuEntry<CategoryLabel>(
+                            value: category,
+                            label: category.label,
+                            enabled: category.label != 'Heart',
+                            style: MenuItemButton.styleFrom(
+                              backgroundColor: whiteColor,
+                              foregroundColor: buttonColor,
+                            ),
+                          );
+                        }).toList(),
+                        label: Text(
+                          'Category',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(color: whiteColor),
+                        ),
+                        onSelected: (CategoryLabel? category) {
+                          setState(() {
+                            selectedCategory = category;
+                          });
+                        },
                       ),
-                    );
-                  }).toList(),
-                  label: const Text('Category'),
-                  onSelected: (CategoryLabel? category) {
-                    setState(() {
-                      selectedCategory = category;
-                    });
-                  },
+                      DropdownMenu<CityLabel>(
+                        initialSelection: CityLabel.egypt,
+                        controller: _cityController,
+                        requestFocusOnTap: true,
+                        dropdownMenuEntries: CityLabel.values
+                            .map<DropdownMenuEntry<CityLabel>>(
+                                (CityLabel city) {
+                          return DropdownMenuEntry<CityLabel>(
+                            value: city,
+                            label: city.label,
+                            enabled: city.label != 'Kesan',
+                            style: MenuItemButton.styleFrom(
+                              backgroundColor: whiteColor,
+                              foregroundColor: buttonColor,
+                            ),
+                          );
+                        }).toList(),
+                        label: Text(
+                          'Cities',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(color: whiteColor),
+                        ),
+                        onSelected: (CityLabel? city) {
+                          setState(() {
+                            selectedCity = city;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),

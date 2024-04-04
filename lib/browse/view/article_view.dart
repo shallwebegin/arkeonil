@@ -29,6 +29,7 @@ class _ArticleViewState extends ConsumerState<ArticleView> {
       authorUid: widget.article.authorUid,
       isFavorite: true,
       category: widget.article.category,
+      cityName: widget.article.cityName,
     );
     ref.read(bookMarkControllerProvider).setArticleFavorite(model);
   }

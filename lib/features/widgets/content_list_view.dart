@@ -109,8 +109,8 @@ class ContentListView extends ConsumerWidget {
               },
             );
           } else if (snapshot.hasError) {
-            return const Center(
-              child: Text("Error"),
+            return Center(
+              child: Text("Error : ${snapshot.error}"),
             );
           } else {
             return const Center(

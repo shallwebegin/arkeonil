@@ -37,6 +37,7 @@ class _DiscoverViewState extends ConsumerState<DiscoverView> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       List<ArchaeCategory> article = snapshot.data!;
+
                       return ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: article.length,

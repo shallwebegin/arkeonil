@@ -6,13 +6,13 @@ import 'package:arkeonil/common/sizes.dart';
 import 'package:arkeonil/features/auth/views/sign_in.dart';
 import 'package:arkeonil/features/more/controller/more_controller.dart';
 import 'package:arkeonil/features/widgets/appbar_with_title.dart';
+import 'package:arkeonil/features/widgets/more_menu_item.dart';
 import 'package:arkeonil/features/widgets/subtitle_widget.dart';
 import 'package:arkeonil/models/user_model.dart';
 import 'package:arkeonil/router/router_names.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class MoreView extends ConsumerWidget {
   const MoreView({
@@ -48,7 +48,7 @@ class MoreView extends ConsumerWidget {
                       padding: vertical10,
                       child: SubTitleWidget(title: 'Create content'),
                     ),
-                    _MoreMenuItem(
+                    MoreMenuItem(
                       onTap: () {
                         Navigator.of(context).pushNamed(
                             AppRouteNames.writeArticle,
@@ -57,7 +57,7 @@ class MoreView extends ConsumerWidget {
                       title: 'Write an article',
                       leadingSvg: articleSvg,
                     ),
-                    _MoreMenuItem(
+                    MoreMenuItem(
                       onTap: () {
                         Navigator.of(context)
                             .pushNamed(AppRouteNames.yourArticles);
@@ -66,12 +66,12 @@ class MoreView extends ConsumerWidget {
                       leadingSvg: articleSvg,
                     ),
                     const SubTitleWidget(title: 'Profile'),
-                    _MoreMenuItem(
+                    MoreMenuItem(
                       onTap: () {},
                       title: 'Edit profile',
                       leadingSvg: editProfile,
                     ),
-                    _MoreMenuItem(
+                    MoreMenuItem(
                       onTap: () {
                         ref.read(moreControllerProvider).signOut().then(
                               (value) => Navigator.of(context).pushReplacement(
@@ -98,44 +98,6 @@ class MoreView extends ConsumerWidget {
             );
           }
         },
-      ),
-    );
-  }
-}
-
-class _MoreMenuItem extends StatelessWidget {
-  const _MoreMenuItem({
-    super.key,
-    required this.onTap,
-    required this.title,
-    required this.leadingSvg,
-  });
-  final void Function()? onTap;
-  final String title;
-  final String leadingSvg;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Padding(
-        padding: vertical5,
-        child: Card(
-            color: buttonColor,
-            child: ListTile(
-              leading: SvgPicture.asset(leadingSvg),
-              title: Text(
-                title,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(color: whiteColor),
-              ),
-              trailing: const Icon(
-                Icons.arrow_forward_ios_outlined,
-                color: whiteColor,
-              ),
-            )),
       ),
     );
   }

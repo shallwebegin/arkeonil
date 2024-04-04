@@ -1,4 +1,4 @@
-import 'package:arkeonil/models/archae_category_models.dart';
+import 'package:arkeonil/models/article_cities_model.dart';
 import 'package:arkeonil/models/article_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,24 +14,40 @@ class CategoryRepository {
 
   CategoryRepository({required this.firebaseFirestore, required this.auth});
 
-  Stream<List<ArchaeCategory>> getProfilePhotosArch() {
+  Stream<List<ArticleModel>> getArticles(String category) {
     return firebaseFirestore
-        .collection('archaecategory')
-        .orderBy('image', descending: true)
+        .collection('articles')
+        .where('category', isEqualTo: category)
         .snapshots()
         .map((snapshot) {
-      List<ArchaeCategory> list = [];
+      List<ArticleModel> list = [];
       for (var model in snapshot.docs) {
-        list.add(ArchaeCategory.fromMap(model.data()));
+        list.add(
+          ArticleModel.fromMap(model.data()),
+        );
       }
       return list;
     });
   }
 
-  Stream<List<ArticleModel>> getArticles(String category) {
+  Stream<List<ArticleCitiesModel>> getCitiesName(String category) {
+    return firebaseFirestore
+        .collection('articlecities')
+        .where('category', isEqualTo: category)
+        .snapshots()
+        .map((snapshot) {
+      List<ArticleCitiesModel> list = [];
+      for (var model in snapshot.docs) {
+        list.add(ArticleCitiesModel.fromMap(model.data()));
+      }
+      return list;
+    });
+  }
+
+  Stream<List<ArticleModel>> getArticlesCities(List<String> cityName) {
     return firebaseFirestore
         .collection('articles')
-        .where('category', isEqualTo: category)
+        .where('cityName', arrayContainsAny: cityName)
         .snapshots()
         .map((snapshot) {
       List<ArticleModel> list = [];

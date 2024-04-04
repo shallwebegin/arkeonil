@@ -1,5 +1,5 @@
 import 'package:arkeonil/categories/repository/categories_repository.dart';
-import 'package:arkeonil/models/archae_category_models.dart';
+import 'package:arkeonil/models/article_cities_model.dart';
 import 'package:arkeonil/models/article_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,11 +13,15 @@ class CategoryController {
 
   CategoryController({required this.categoryRepository});
 
-  Stream<List<ArchaeCategory>> getProfilePhotosArch() {
-    return categoryRepository.getProfilePhotosArch();
-  }
-
   Stream<List<ArticleModel>> getArticles(String category) {
     return categoryRepository.getArticles(category);
+  }
+
+  Stream<List<ArticleCitiesModel>> getCitiesName(String category) {
+    return categoryRepository.getCitiesName(category);
+  }
+
+  Stream<List<ArticleModel>> getArticlesCities(List<String> cityName) {
+    return categoryRepository.getArticlesCities(cityName);
   }
 }

@@ -1,22 +1,28 @@
+import 'package:flutter/foundation.dart';
+
 class ArchaeCategory {
   final String category;
   final String categoryId;
   final String image;
+  final List<String> cityName;
   ArchaeCategory({
     required this.category,
     required this.categoryId,
     required this.image,
+    required this.cityName,
   });
 
   ArchaeCategory copyWith({
     String? category,
     String? categoryId,
     String? image,
+    List<String>? cityName,
   }) {
     return ArchaeCategory(
       category: category ?? this.category,
       categoryId: categoryId ?? this.categoryId,
       image: image ?? this.image,
+      cityName: cityName ?? this.cityName,
     );
   }
 
@@ -25,20 +31,24 @@ class ArchaeCategory {
       'category': category,
       'categoryId': categoryId,
       'image': image,
+      'cityName': cityName,
     };
   }
 
   factory ArchaeCategory.fromMap(Map<String, dynamic> map) {
     return ArchaeCategory(
-      category: map['category'] as String,
-      categoryId: map['categoryId'] as String,
-      image: map['image'] as String,
-    );
+        category: map['category'] as String,
+        categoryId: map['categoryId'] as String,
+        image: map['image'] as String,
+        cityName: List<String>.from(
+          (map['cityName'] as List<dynamic>).cast<String>(),
+        ));
   }
 
   @override
-  String toString() =>
-      'ArchaeCategory(category: $category, categoryId: $categoryId, image: $image)';
+  String toString() {
+    return 'ArchaeCategory(category: $category, categoryId: $categoryId, image: $image, cityName: $cityName)';
+  }
 
   @override
   bool operator ==(covariant ArchaeCategory other) {
@@ -46,9 +56,15 @@ class ArchaeCategory {
 
     return other.category == category &&
         other.categoryId == categoryId &&
-        other.image == image;
+        other.image == image &&
+        listEquals(other.cityName, cityName);
   }
 
   @override
-  int get hashCode => category.hashCode ^ categoryId.hashCode ^ image.hashCode;
+  int get hashCode {
+    return category.hashCode ^
+        categoryId.hashCode ^
+        image.hashCode ^
+        cityName.hashCode;
+  }
 }

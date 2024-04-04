@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class FavoriteModel {
   final String uid;
   final String title;
@@ -9,6 +11,7 @@ class FavoriteModel {
   final String authorUid;
   bool isFavorite;
   final String category;
+  final List<String> cityName;
 
   FavoriteModel({
     required this.uid,
@@ -21,6 +24,7 @@ class FavoriteModel {
     required this.authorUid,
     required this.isFavorite,
     required this.category,
+    required this.cityName,
   });
 
   FavoriteModel copyWith({
@@ -34,6 +38,7 @@ class FavoriteModel {
     String? authorUid,
     bool? isFavorite,
     String? category,
+    List<String>? cityName,
   }) {
     return FavoriteModel(
       uid: uid ?? this.uid,
@@ -46,6 +51,7 @@ class FavoriteModel {
       authorUid: authorUid ?? this.authorUid,
       isFavorite: isFavorite ?? this.isFavorite,
       category: category ?? this.category,
+      cityName: cityName ?? this.cityName,
     );
   }
 
@@ -61,27 +67,30 @@ class FavoriteModel {
       'authorUid': authorUid,
       'isFavorite': isFavorite,
       'category': category,
+      'cityName': cityName,
     };
   }
 
   factory FavoriteModel.fromMap(Map<String, dynamic> map) {
     return FavoriteModel(
-      uid: map['uid'] as String,
-      title: map['title'] as String,
-      coverImg: map['coverImg'] != null ? map['coverImg'] as String : null,
-      content: map['content'] as String,
-      author: map['author'] as String,
-      authorImg: map['authorImg'] != null ? map['authorImg'] as String : null,
-      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
-      authorUid: map['authorUid'] as String,
-      isFavorite: map['isFavorite'] as bool,
-      category: map['category'] as String,
-    );
+        uid: map['uid'] as String,
+        title: map['title'] as String,
+        coverImg: map['coverImg'] != null ? map['coverImg'] as String : null,
+        content: map['content'] as String,
+        author: map['author'] as String,
+        authorImg: map['authorImg'] != null ? map['authorImg'] as String : null,
+        createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
+        authorUid: map['authorUid'] as String,
+        isFavorite: map['isFavorite'] as bool,
+        category: map['category'] as String,
+        cityName: List<String>.from(
+          (map['cityName'] as List<String>),
+        ));
   }
 
   @override
   String toString() {
-    return 'FavoriteModel(uid: $uid, title: $title, coverImg: $coverImg, content: $content, author: $author, authorImg: $authorImg, createdAt: $createdAt, authorUid: $authorUid, isFavorite: $isFavorite, category: $category)';
+    return 'FavoriteModel(uid: $uid, title: $title, coverImg: $coverImg, content: $content, author: $author, authorImg: $authorImg, createdAt: $createdAt, authorUid: $authorUid, isFavorite: $isFavorite, category: $category, cityName: $cityName)';
   }
 
   @override
@@ -97,7 +106,8 @@ class FavoriteModel {
         other.createdAt == createdAt &&
         other.authorUid == authorUid &&
         other.isFavorite == isFavorite &&
-        other.category == category;
+        other.category == category &&
+        listEquals(other.cityName, cityName);
   }
 
   @override
@@ -111,6 +121,7 @@ class FavoriteModel {
         createdAt.hashCode ^
         authorUid.hashCode ^
         isFavorite.hashCode ^
-        category.hashCode;
+        category.hashCode ^
+        cityName.hashCode;
   }
 }
