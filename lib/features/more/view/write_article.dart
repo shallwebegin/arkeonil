@@ -6,7 +6,6 @@ import 'package:arkeonil/common/repository/common_firebase_repository.dart';
 import 'package:arkeonil/common/sizes.dart';
 import 'package:arkeonil/common/utils.dart';
 import 'package:arkeonil/features/more/controller/more_controller.dart';
-import 'package:arkeonil/models/article_cities_model.dart';
 import 'package:arkeonil/models/article_model.dart';
 import 'package:arkeonil/models/user_model.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +32,7 @@ enum CityLabel {
 
   greek('Athens'),
   turkey('Kesan'),
+
   greek2('Xanthi');
 
   const CityLabel(
@@ -262,7 +262,6 @@ class _WriteArticleState extends ConsumerState<WriteArticle> {
                           return DropdownMenuEntry<CityLabel>(
                             value: city,
                             label: city.label,
-                            enabled: city.label != 'Kesan',
                             style: MenuItemButton.styleFrom(
                               backgroundColor: whiteColor,
                               foregroundColor: buttonColor,

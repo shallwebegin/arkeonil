@@ -1,6 +1,3 @@
-// ignore_for_file: unused_element
-
-import 'package:arkeonil/common/colors.dart';
 import 'package:arkeonil/common/paths.dart';
 import 'package:arkeonil/common/sizes.dart';
 import 'package:arkeonil/features/auth/views/sign_in.dart';

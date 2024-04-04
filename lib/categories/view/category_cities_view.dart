@@ -42,6 +42,7 @@ class CategoryCitiesView extends ConsumerWidget {
                       }
                       if (snapshot.hasData) {
                         List<ArticleModel> articles = snapshot.data!;
+
                         return ListView.builder(
                           scrollDirection: Axis.vertical,
                           itemCount: articles.length,

@@ -1,4 +1,4 @@
-import 'package:arkeonil/models/article_cities_model.dart';
+import 'package:arkeonil/models/archae_category_models.dart';
 import 'package:arkeonil/models/article_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,15 +30,17 @@ class CategoryRepository {
     });
   }
 
-  Stream<List<ArticleCitiesModel>> getCitiesName(String category) {
+  Stream<List<ArchaeCategory>> getCitiesName(
+      String category, List<String> cityName) {
     return firebaseFirestore
-        .collection('articlecities')
+        .collection('archaecategory')
         .where('category', isEqualTo: category)
+        .where('cityName', arrayContainsAny: cityName)
         .snapshots()
         .map((snapshot) {
-      List<ArticleCitiesModel> list = [];
+      List<ArchaeCategory> list = [];
       for (var model in snapshot.docs) {
-        list.add(ArticleCitiesModel.fromMap(model.data()));
+        list.add(ArchaeCategory.fromMap(model.data()));
       }
       return list;
     });

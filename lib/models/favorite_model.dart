@@ -84,7 +84,7 @@ class FavoriteModel {
         isFavorite: map['isFavorite'] as bool,
         category: map['category'] as String,
         cityName: List<String>.from(
-          (map['cityName'] as List<String>),
+          (map['cityName'] as List<dynamic>).cast<String>(),
         ));
   }
 

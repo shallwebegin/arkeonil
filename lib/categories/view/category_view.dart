@@ -5,7 +5,6 @@ import 'package:arkeonil/common/paths.dart';
 import 'package:arkeonil/common/sizes.dart';
 import 'package:arkeonil/features/widgets/more_menu_item.dart';
 import 'package:arkeonil/models/archae_category_models.dart';
-import 'package:arkeonil/models/article_cities_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -37,31 +36,32 @@ class CategoryView extends ConsumerWidget {
               children: [
                 Expanded(
                   flex: 1,
-                  child: StreamBuilder<List<ArticleCitiesModel>>(
+                  child: StreamBuilder<List<ArchaeCategory>>(
                     stream: ref
                         .watch(categoryControllerProvider)
-                        .getCitiesName(model.category),
+                        .getCitiesName(model.category, model.cityName),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        List<ArticleCitiesModel> cities = snapshot.data!;
+                        List<ArchaeCategory> cities = snapshot.data!;
                         return ListView.builder(
                           itemCount: cities.length,
                           itemBuilder: (context, index) {
                             final city = cities[index];
                             return Column(
                               children: [
-                                MoreMenuItem(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            CategoryCitiesView(model: model),
-                                      ),
-                                    );
-                                  },
-                                  title: city.cityName,
-                                  leadingSvg: articleSvg,
-                                ),
+                                ...city.cityName.map((name) => MoreMenuItem(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                CategoryCitiesView(
+                                                    model: model),
+                                          ),
+                                        );
+                                      },
+                                      title: name,
+                                      leadingSvg: articleSvg,
+                                    )),
                               ],
                             );
                           },
