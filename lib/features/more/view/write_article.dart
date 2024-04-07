@@ -5,6 +5,7 @@ import 'package:arkeonil/common/paths.dart';
 import 'package:arkeonil/common/repository/common_firebase_repository.dart';
 import 'package:arkeonil/common/sizes.dart';
 import 'package:arkeonil/common/utils.dart';
+import 'package:arkeonil/constants/string_constants.dart';
 import 'package:arkeonil/features/more/controller/more_controller.dart';
 import 'package:arkeonil/models/article_model.dart';
 import 'package:arkeonil/models/user_model.dart';
@@ -89,7 +90,7 @@ class _WriteArticleState extends ConsumerState<WriteArticle> {
             ),
           ),
           title: Text(
-            'Your Article',
+            StringConstants.yourArticle,
             style: Theme.of(context)
                 .textTheme
                 .headlineLarge
@@ -180,14 +181,14 @@ class _WriteArticleState extends ConsumerState<WriteArticle> {
                           controller: _titleController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please fill the title';
+                              return StringConstants.pleaseFillTheTitle;
                             }
                             return null;
                           },
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(
                                 borderSide: BorderSide.none),
-                            hintText: 'Your article title here !',
+                            hintText: StringConstants.yourArticleTitleHere,
                             hintStyle: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -200,14 +201,14 @@ class _WriteArticleState extends ConsumerState<WriteArticle> {
                           maxLines: 100,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Please fill the article';
+                              return StringConstants.pleaseFillTheTitle;
                             }
                             return null;
                           },
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(
                                 borderSide: BorderSide.none),
-                            hintText: 'Your article content here !',
+                            hintText: StringConstants.yourArticleTitleHere,
                             hintStyle: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -240,7 +241,7 @@ class _WriteArticleState extends ConsumerState<WriteArticle> {
                           );
                         }).toList(),
                         label: Text(
-                          'Category',
+                          StringConstants.category,
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium
@@ -269,7 +270,7 @@ class _WriteArticleState extends ConsumerState<WriteArticle> {
                           );
                         }).toList(),
                         label: Text(
-                          'Cities',
+                          StringConstants.cities,
                           style: Theme.of(context)
                               .textTheme
                               .titleMedium

@@ -77,7 +77,7 @@ class _SignUpContinueState extends State<SignUpContinue> {
                           controller: _nameController,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Name is required';
+                              return StringConstants.nameIsRequired;
                             }
                             return null;
                           },
@@ -101,7 +101,7 @@ class _SignUpContinueState extends State<SignUpContinue> {
                           controller: _surnameController,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Surname is required';
+                              return StringConstants.surnameIsRequired;
                             }
                             return null;
                           },
@@ -123,7 +123,7 @@ class _SignUpContinueState extends State<SignUpContinue> {
                           controller: _usernameController,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Username is required';
+                              return StringConstants.usernameIsRequired;
                             }
                             return null;
                           },

@@ -1,12 +1,11 @@
 import 'package:arkeonil/bookmark/controller/bookmark_controller.dart';
 import 'package:arkeonil/common/colors.dart';
-import 'package:arkeonil/common/paths.dart';
 import 'package:arkeonil/common/sizes.dart';
 import 'package:arkeonil/models/article_model.dart';
+import 'package:arkeonil/models/favorite_model.dart';
 import 'package:arkeonil/router/router_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class BookmarkView extends ConsumerStatefulWidget {
   const BookmarkView({super.key});
@@ -16,9 +15,22 @@ class BookmarkView extends ConsumerStatefulWidget {
 }
 
 class _BookmarkViewState extends ConsumerState<BookmarkView> {
+  bool isFavorite = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text(
+          'Your Bookmarks',
+          style: Theme.of(context)
+              .textTheme
+              .headlineLarge
+              ?.copyWith(color: whiteColor),
+        ),
+      ),
       body: Column(
         children: [
           Expanded(
@@ -89,32 +101,60 @@ class _BookmarkViewState extends ConsumerState<BookmarkView> {
                                 ),
                               ),
                               Expanded(
-                                flex: 3,
+                                flex: 1,
                                 child: Row(
                                   children: [
-                                    Padding(
-                                      padding: horizontal25,
-                                      child: CircleAvatar(
-                                        backgroundColor: buttonColor,
-                                        child: SvgPicture.asset(
-                                          bookmarkSvg,
-                                          colorFilter: const ColorFilter.mode(
-                                            whiteColor,
-                                            BlendMode.srcIn,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
                                     Padding(
                                       padding: horizontal10,
                                       child: CircleAvatar(
                                         backgroundColor: buttonColor,
-                                        child: SvgPicture.asset(
-                                          bookmarkSvg,
-                                          colorFilter: const ColorFilter.mode(
-                                            whiteColor,
-                                            BlendMode.srcIn,
-                                          ),
+                                        child: IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              isFavorite = !isFavorite;
+                                            });
+                                            if (isFavorite) {
+                                              FavoriteModel model =
+                                                  FavoriteModel(
+                                                createdAt: article.createdAt,
+                                                author: article.author,
+                                                content: article.content,
+                                                title: article.title,
+                                                authorImg: article.authorImg,
+                                                coverImg: article.coverImg,
+                                                uid: article.uid,
+                                                authorUid: article.authorUid,
+                                                isFavorite: true,
+                                                category: article.category,
+                                                cityName: article.cityName,
+                                              );
+                                              ref
+                                                  .read(
+                                                      bookMarkControllerProvider)
+                                                  .setArticleFavorite(model);
+                                            } else {
+                                              FavoriteModel model =
+                                                  FavoriteModel(
+                                                createdAt: article.createdAt,
+                                                author: article.author,
+                                                content: article.content,
+                                                title: article.title,
+                                                authorImg: article.authorImg,
+                                                coverImg: article.coverImg,
+                                                uid: article.uid,
+                                                authorUid: article.authorUid,
+                                                isFavorite: false,
+                                                category: article.category,
+                                                cityName: article.cityName,
+                                              );
+                                              ref
+                                                  .read(
+                                                      bookMarkControllerProvider)
+                                                  .setArticleFavorite(model);
+                                            }
+                                          },
+                                          icon: const Icon(Icons.delete),
+                                          color: whiteColor,
                                         ),
                                       ),
                                     ),

@@ -51,11 +51,14 @@ class CategoryView extends ConsumerWidget {
                               children: [
                                 ...city.cityName.map((name) => MoreMenuItem(
                                       onTap: () {
+                                        List<String> selectedCity = [name];
                                         Navigator.of(context).push(
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 CategoryCitiesView(
-                                                    model: model),
+                                              model: model,
+                                              selectedCity: selectedCity,
+                                            ),
                                           ),
                                         );
                                       },

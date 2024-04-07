@@ -1,6 +1,7 @@
 import 'package:arkeonil/common/colors.dart';
 import 'package:arkeonil/common/paths.dart';
 import 'package:arkeonil/common/sizes.dart';
+import 'package:arkeonil/constants/string_constants.dart';
 import 'package:arkeonil/features/more/controller/more_controller.dart';
 import 'package:arkeonil/models/article_model.dart';
 import 'package:arkeonil/router/router_names.dart';
@@ -23,7 +24,7 @@ class YourArticles extends ConsumerWidget {
           color: whiteColor,
         ),
         title: Text(
-          'Your Articles',
+          StringConstants.yourArticle,
           style: Theme.of(context)
               .textTheme
               .headlineLarge

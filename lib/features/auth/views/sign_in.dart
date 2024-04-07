@@ -77,7 +77,7 @@ class _SignInState extends State<SignIn> {
                             if (value!.isEmpty ||
                                 !value.contains('@') ||
                                 value.trim().isEmpty) {
-                              return 'Email is required';
+                              return StringConstants.emailIsRequired;
                             }
                             return null;
                           },
@@ -102,7 +102,7 @@ class _SignInState extends State<SignIn> {
                           controller: _passwordController,
                           validator: (value) {
                             if (value!.isEmpty || value.trim().length < 4) {
-                              return 'Password is required';
+                              return StringConstants.passwordIsRequired;
                             }
                             return null;
                           },

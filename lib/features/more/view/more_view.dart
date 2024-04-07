@@ -1,5 +1,6 @@
 import 'package:arkeonil/common/paths.dart';
 import 'package:arkeonil/common/sizes.dart';
+import 'package:arkeonil/constants/string_constants.dart';
 import 'package:arkeonil/features/auth/views/sign_in.dart';
 import 'package:arkeonil/features/more/controller/more_controller.dart';
 import 'package:arkeonil/features/widgets/appbar_with_title.dart';
@@ -43,7 +44,8 @@ class MoreView extends ConsumerWidget {
                     ),
                     const Padding(
                       padding: vertical10,
-                      child: SubTitleWidget(title: 'Create content'),
+                      child:
+                          SubTitleWidget(title: StringConstants.createContent),
                     ),
                     MoreMenuItem(
                       onTap: () {
@@ -51,7 +53,7 @@ class MoreView extends ConsumerWidget {
                             AppRouteNames.writeArticle,
                             arguments: {'currentUser': userModel});
                       },
-                      title: 'Write an article',
+                      title: StringConstants.writeAnArticle,
                       leadingSvg: articleSvg,
                     ),
                     MoreMenuItem(
@@ -59,13 +61,13 @@ class MoreView extends ConsumerWidget {
                         Navigator.of(context)
                             .pushNamed(AppRouteNames.yourArticles);
                       },
-                      title: 'Your articles',
+                      title: StringConstants.yourArticle,
                       leadingSvg: articleSvg,
                     ),
-                    const SubTitleWidget(title: 'Profile'),
+                    const SubTitleWidget(title: StringConstants.profile),
                     MoreMenuItem(
                       onTap: () {},
-                      title: 'Edit profile',
+                      title: StringConstants.editProfile,
                       leadingSvg: editProfile,
                     ),
                     MoreMenuItem(
@@ -78,7 +80,7 @@ class MoreView extends ConsumerWidget {
                               ),
                             );
                       },
-                      title: 'Sign out',
+                      title: StringConstants.signOut,
                       leadingSvg: signOutSvg,
                     ),
                   ],

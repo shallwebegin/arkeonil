@@ -2,6 +2,7 @@ import 'package:arkeonil/bookmark/view/bookmark_view.dart';
 import 'package:arkeonil/browse/view/browse_view.dart';
 import 'package:arkeonil/common/colors.dart';
 import 'package:arkeonil/common/paths.dart';
+import 'package:arkeonil/constants/string_constants.dart';
 import 'package:arkeonil/discover/view/discover_view.dart';
 import 'package:arkeonil/features/more/view/more_view.dart';
 import 'package:flutter/material.dart';
@@ -41,19 +42,19 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
               icon: SvgPicture.asset(homeDeActiveSvg),
               activeIcon: SvgPicture.asset(homeActiveSvg),
-              label: 'Discover'),
+              label: StringConstants.discover),
           BottomNavigationBarItem(
               icon: SvgPicture.asset(browseDeActiveSvg),
               activeIcon: SvgPicture.asset(browseActiveSvg),
-              label: 'Browse'),
+              label: StringConstants.browse),
           BottomNavigationBarItem(
               icon: SvgPicture.asset(bookmarkDeActiveSvg),
               activeIcon: SvgPicture.asset(bookmarkActiveSvg),
-              label: 'Bookmark'),
+              label: StringConstants.bookmark),
           BottomNavigationBarItem(
               icon: SvgPicture.asset(userDeActiveSvg),
               activeIcon: SvgPicture.asset(userActiveSvg),
-              label: 'More'),
+              label: StringConstants.more),
         ],
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:arkeonil/categories/view/category_view.dart';
 import 'package:arkeonil/common/colors.dart';
 import 'package:arkeonil/common/sizes.dart';
+import 'package:arkeonil/constants/string_constants.dart';
 import 'package:arkeonil/discover/controller/discover_controller.dart';
 import 'package:arkeonil/features/widgets/appbar_with_title.dart';
 import 'package:arkeonil/features/widgets/content_list_view.dart';
@@ -28,7 +29,7 @@ class _DiscoverViewState extends ConsumerState<DiscoverView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const AppbarWithTitle(title: 'Discover'),
+              const AppbarWithTitle(title: StringConstants.discover),
               Expanded(
                 flex: 1,
                 child: StreamBuilder<List<ArchaeCategory>>(
@@ -87,11 +88,11 @@ class _DiscoverViewState extends ConsumerState<DiscoverView> {
                 ),
               ),
               const SubTitleWidget(
-                title: 'Most viewed articles',
+                title: StringConstants.mostViewedArticles,
               ),
               const Expanded(flex: 2, child: ContentListView()),
               const SubTitleWidget(
-                title: 'Articles',
+                title: StringConstants.articles,
               ),
               const Expanded(
                 flex: 2,

@@ -9,7 +9,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ArticleView extends ConsumerStatefulWidget {
-  const ArticleView({super.key, required this.article});
+  const ArticleView({
+    super.key,
+    required this.article,
+  });
   final ArticleModel article;
 
   @override
@@ -17,22 +20,7 @@ class ArticleView extends ConsumerStatefulWidget {
 }
 
 class _ArticleViewState extends ConsumerState<ArticleView> {
-  void isFavorite() {
-    FavoriteModel model = FavoriteModel(
-      createdAt: widget.article.createdAt,
-      author: widget.article.author,
-      content: widget.article.content,
-      title: widget.article.title,
-      authorImg: widget.article.authorImg,
-      coverImg: widget.article.coverImg,
-      uid: widget.article.uid,
-      authorUid: widget.article.authorUid,
-      isFavorite: true,
-      category: widget.article.category,
-      cityName: widget.article.cityName,
-    );
-    ref.read(bookMarkControllerProvider).setArticleFavorite(model);
-  }
+  late bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +43,7 @@ class _ArticleViewState extends ConsumerState<ArticleView> {
         ),
         actions: [
           IconButton(
-            onPressed: isFavorite,
+            onPressed: toggleFavorite,
             icon: CircleAvatar(
               backgroundColor: buttonColor,
               child: SvgPicture.asset(
@@ -119,5 +107,43 @@ class _ArticleViewState extends ConsumerState<ArticleView> {
         ),
       ),
     );
+  }
+
+  void toggleFavorite() {
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+
+    if (isFavorite) {
+      FavoriteModel model = FavoriteModel(
+        createdAt: widget.article.createdAt,
+        author: widget.article.author,
+        content: widget.article.content,
+        title: widget.article.title,
+        authorImg: widget.article.authorImg,
+        coverImg: widget.article.coverImg,
+        uid: widget.article.uid,
+        authorUid: widget.article.authorUid,
+        isFavorite: true,
+        category: widget.article.category,
+        cityName: widget.article.cityName,
+      );
+      ref.read(bookMarkControllerProvider).setArticleFavorite(model);
+    } else {
+      FavoriteModel model = FavoriteModel(
+        createdAt: widget.article.createdAt,
+        author: widget.article.author,
+        content: widget.article.content,
+        title: widget.article.title,
+        authorImg: widget.article.authorImg,
+        coverImg: widget.article.coverImg,
+        uid: widget.article.uid,
+        authorUid: widget.article.authorUid,
+        isFavorite: false,
+        category: widget.article.category,
+        cityName: widget.article.cityName,
+      );
+      ref.read(bookMarkControllerProvider).setArticleFavorite(model);
+    }
   }
 }

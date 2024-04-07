@@ -21,6 +21,7 @@ class BookMarkRepository {
         .collection('users')
         .doc(auth.currentUser!.uid)
         .collection('favorite')
+        .where('isFavorite', isEqualTo: true)
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map(

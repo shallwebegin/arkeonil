@@ -75,7 +75,7 @@ class _SignUpState extends State<SignUp> {
                           controller: _emailController,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Email is required';
+                              return StringConstants.emailIsRequired;
                             }
                             return null;
                           },
@@ -99,7 +99,7 @@ class _SignUpState extends State<SignUp> {
                           controller: _passwordController,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Password is required';
+                              return StringConstants.passwordIsRequired;
                             }
                             return null;
                           },
